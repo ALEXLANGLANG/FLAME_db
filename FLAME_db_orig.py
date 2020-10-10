@@ -258,8 +258,10 @@ def run_db(db_name, holdout_df, num_covs,treatment_column_name,outcome_column_na
                     # fifth entry - update database table (mark matched units). 
     
     # initialize the current covariates to be all covariates
-    tmp_df = holdout_df.iloc[:, :num_covs]
-    cur_covs= tmp_df.columns
+    cols_all = holdout_df.columns.drop([treatment_column_name, outcome_column_name])
+    if 'matched' in cols_all: 
+        cols_all = cols_all.drop('matched')
+    cur_covs= cols_all
     
     # make predictions and save to disk
     s = time.time()
@@ -352,7 +354,7 @@ def read_files(input_data, holdout_data):
     
     return df_holdout
 
-def connect_db(select_db, database_name, host, port, user, password):
+def connect_db(select_db, database_name, host, port, user, password, driver):
     conn = None;
     if select_db == "MySQL":
         conn = mysql.connector.connect(host=host,
@@ -366,6 +368,13 @@ def connect_db(select_db, database_name, host, port, user, password):
                                 user=user,
                                 password=password,
                                 database=database_name)
+        
+    elif select_db == "Microsoft SQL server":
+        conn = pyodbc.connect('DRIVER='+driver+
+                              '; SERVER='+host+
+                              ';DATABASE='+database_name+
+                              ';UID='+user+
+                              ';PWD='+ password)
     else:
         raise Exception("please select the database you are using "\
                         "frame in parameter 'input_data'")
@@ -373,16 +382,28 @@ def connect_db(select_db, database_name, host, port, user, password):
     cur = conn.cursor()
     return cur,conn
 
+# def FLAME_db(input_data, holdout_data, treatment_column_name, outcome_column_name, reg_param,
+#              select_db, database_name, host, port, user, password):
+    
+#     cur,conn = connect_db(select_db = select_db, database_name=database_name, host = host, 
+#                    port = port, user=user, password= password)
+    
+#     holdout_data = read_files(input_data, holdout_data)
+    
+#     res = run_db(input_data, holdout_data, len(holdout_data.columns)-3,
+#                  treatment_column_name,outcome_column_name, cur, conn,reg_param)
+#     print("Done")
+#     return res
 
 def FLAME_db(input_data, holdout_data, treatment_column_name, outcome_column_name, reg_param,
-             select_db, database_name, host, port, user, password):
+             select_db, database_name, host, user, password, port = None, driver = None):
     
     cur,conn = connect_db(select_db = select_db, database_name=database_name, host = host, 
-                   port = port, user=user, password= password)
+                   port = port, user=user, password= password, driver = driver)
     
     holdout_data = read_files(input_data, holdout_data)
     
-    res = run_db(input_data, holdout_data, len(holdout_data.columns)-3,
-                 treatment_column_name,outcome_column_name, cur, conn,reg_param)
-    print("Done")
+    res = run_db(input_data, holdout_data,
+                 treatment_column_name,outcome_column_name, cur, conn,reg_param = reg_param)
+    print("Done Matching")
     return res
