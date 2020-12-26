@@ -23,59 +23,109 @@ def check_statistics(res_post_new):
         return True
     return False
 
-class TestFlame_db(unittest.TestCase):
-              
-    def test_weights(self):
-        #Generate toy dataset
-        p = 20
-        TE = 5
-        data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
-        holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
-        #Connect to the database
-        select_db = "postgreSQL"  # Select the database you are using
-        database_name='tmp' # database name
-        host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
-        port = "5432"
-        user="newuser"
-        password= "sunxian123"
-        conn = connect_db(database_name, user, password, host, port)
 
-        #Insert the data into database
-        insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-                            data,
-                            treatment_column_name= "Treated",
-                            outcome_column_name= 'outcome123',conn = conn)
-    
-        is_corrct = 1
-        try:
-        
-            for verbose in [0,1,2,3]:
-                print(verbose)
-                for matching_option in [0,1,2,3]:
-                    print(matching_option)
-                    #Test fixed weights
-                    for adaptive_weights in ['ridge', 'decisiontree',False]:
-                        print(adaptive_weights)
-                        res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                                    holdout_data = holdout, # holdout set
-                                    treatment_column_name= "Treated",
-                                    outcome_column_name= 'outcome123',
-                                    C = 0.1,
-                                    conn = conn,
-                                    matching_option = matching_option,
-                                    adaptive_weights = adaptive_weights,
-                                    weight_array = weight_array,
-                                    verbose = verbose,
-                                    k = 0
-                                    )
-                        if check_statistics(res_post_new):
-                            is_corrct = 0
-            
-        except (KeyError, ValueError):
+p = 20
+TE = 5
+data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
+holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
+#Connect to the database
+select_db = "postgreSQL"  # Select the database you are using
+database_name='tmp' # database name
+host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+port = "5432"
+user="newuser"
+password= "sunxian123"
+conn = connect_db(database_name, user, password, host, port)
+
+#Insert the data into database
+insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "Treated",
+                    outcome_column_name= 'outcome123',conn = conn)
+
+is_corrct = 1
+
+
+for verbose in [0,1,2,3]:
+    print(verbose)
+    for matching_option in [0,1,2,3]:
+        print(matching_option)
+        #Test fixed weights
+        for adaptive_weights in ['ridge', 'decisiontree',False]:
+            print(adaptive_weights)
+            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+                        holdout_data = holdout, # holdout set
+                        treatment_column_name= "Treated",
+                        outcome_column_name= 'outcome123',
+                        C = 0.1,
+                        conn = conn,
+                        matching_option = matching_option,
+                        adaptive_weights = adaptive_weights,
+                        weight_array = weight_array,
+                        verbose = verbose,
+                        k = 0
+                        )
+            if check_statistics(res_post_new):
                 is_corrct = 0
+    
 
-        self.assertEqual(1, is_corrct,
-                             msg='Error when test weights')
+
+
+
+
+#class TestFlame_db(unittest.TestCase):
+#
+#    def test_weights(self):
+#        #Generate toy dataset
+#        p = 20
+#        TE = 5
+#        data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
+#        holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
+#        #Connect to the database
+#        select_db = "postgreSQL"  # Select the database you are using
+#        database_name='tmp' # database name
+#        host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+#        port = "5432"
+#        user="newuser"
+#        password= "sunxian123"
+#        conn = connect_db(database_name, user, password, host, port)
+#
+#        #Insert the data into database
+#        insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+#                            data,
+#                            treatment_column_name= "Treated",
+#                            outcome_column_name= 'outcome123',conn = conn)
+#
+#        is_corrct = 1
+#        try:
+#
+#            for verbose in [0,1,2,3]:
+#                print(verbose)
+#                for matching_option in [0,1,2,3]:
+#                    print(matching_option)
+#                    #Test fixed weights
+#                    for adaptive_weights in ['ridge', 'decisiontree',False]:
+#                        print(adaptive_weights)
+#                        res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+#                                    holdout_data = holdout, # holdout set
+#                                    treatment_column_name= "Treated",
+#                                    outcome_column_name= 'outcome123',
+#                                    C = 0.1,
+#                                    conn = conn,
+#                                    matching_option = matching_option,
+#                                    adaptive_weights = adaptive_weights,
+#                                    weight_array = weight_array,
+#                                    verbose = verbose,
+#                                    k = 0
+#                                    )
+#                        if check_statistics(res_post_new):
+#                            is_corrct = 0
+#
+#        except (KeyError, ValueError):
+#                is_corrct = 0
+#
+#        self.assertEqual(1, is_corrct,
+#                             msg='Error when test weights')
             
 #    def test_stop_iterations(self):
 #        is_corrct = 1
