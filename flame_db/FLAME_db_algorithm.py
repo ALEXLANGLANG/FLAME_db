@@ -54,11 +54,11 @@ def run_main(db_name, holdout_df,treatment_column_name,outcome_column_name,
             ):
     
     #Add column "matched" to dataset
-    cur.execute('''ALTER TABLE {0} DROP COLUMN IF EXISTS is_matched;
-                   ALTER TABLE {0} ADD COLUMN is_matched Integer;
+    cur.execute('''ALTER TABLE {0} DROP COLUMN IF EXISTS is_matched;'''.format(db_name)) # reset the matched indicator to 0
+    conn.commit()
+    cur.execute('''ALTER TABLE {0} ADD COLUMN is_matched Integer;
                    update {0} set is_matched = 0'''.format(db_name)) # reset the matched indicator to 0
     conn.commit()
-    
     covs_dropped = [] # covariate dropped
     ds = []
     level_matched = [] # To store levels where we do matching
@@ -199,7 +199,7 @@ def run_main(db_name, holdout_df,treatment_column_name,outcome_column_name,
         curr_dummy = set(curr_dummy) -  mapp_[cov_to_drop]
         
         # If the cov is unimpoartant and matching_option == 0, just drop it without matching
-        if matching_option == 0 and is_unimportant:
+        if matching_option == 0 and is_unimportant and (not fixed_weights):
             continue  
         
         #Update the database and matched groups and other statistics like CATE

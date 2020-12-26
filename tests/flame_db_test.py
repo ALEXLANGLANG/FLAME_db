@@ -29,7 +29,7 @@ class TestFlame(unittest.TestCase):
                             data, 
                             treatment_column_name= "Treated",
                             outcome_column_name= 'outcome123',conn = conn)
-        
+        is_corrct = 1
         try:
             for verbose in [0,1,2,3]:
                 for matching_option in [0,1,2,3]:
