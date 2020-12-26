@@ -10,26 +10,6 @@ import os
 import sys
 
 
-#Generate toy dataset
-p = 20
-TE = 5
-data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
-holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
-#Connect to the database
-select_db = "postgreSQL"  # Select the database you are using
-database_name='tmp' # database name
-host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
-port = "5432"
-user="newuser"
-password= "sunxian123"
-conn = connect_db(database_name, user, password, host, port)
-
-#Insert the data into database
-insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-                    data,
-                    treatment_column_name= "Treated",
-                    outcome_column_name= 'outcome123',conn = conn)
-
 
 
 def check_statistics(res_post_new):
@@ -46,8 +26,29 @@ def check_statistics(res_post_new):
 class TestFlame_db(unittest.TestCase):
               
     def test_weights(self):
+        #Generate toy dataset
+        p = 20
+        TE = 5
+        data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
+        holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
+        #Connect to the database
+        select_db = "postgreSQL"  # Select the database you are using
+        database_name='tmp' # database name
+        host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+        port = "5432"
+        user="newuser"
+        password= "sunxian123"
+        conn = connect_db(database_name, user, password, host, port)
+
+        #Insert the data into database
+        insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+                            data,
+                            treatment_column_name= "Treated",
+                            outcome_column_name= 'outcome123',conn = conn)
+    
         is_corrct = 1
         try:
+        
             for verbose in [0,1,2,3]:
                 print(verbose)
                 for matching_option in [0,1,2,3]:
