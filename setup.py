@@ -23,7 +23,7 @@ setuptools.setup(name='flame_db',
           'numpy>=1.6.1'
       ],
       extras_require={
-        "SQL":  ["psycopg2>=2.8.6","pyodbc>=4.0.30"],
+        "SQL":  ["psycopg2>=2.8.6"],
     }
      long_description_content_type="text/markdown",
      classifiers=[

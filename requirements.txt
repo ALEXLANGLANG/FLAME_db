@@ -3,4 +3,3 @@ pandas>=0.11.0
 scikit-learn>=0.23.2
 scipy>=0.14
 psycopg2>=2.8.6
-pyodbc>=4.0.30
