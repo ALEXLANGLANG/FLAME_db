@@ -49,9 +49,12 @@ class TestFlame_db(unittest.TestCase):
         is_corrct = 1
         try:
             for verbose in [0,1,2,3]:
+                print(verbose)
                 for matching_option in [0,1,2,3]:
+                    print(matching_option)
                     #Test fixed weights
                     for adaptive_weights in ['ridge', 'decisiontree',False]:
+                        print(adaptive_weights)
                         res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "Treated",
@@ -73,60 +76,60 @@ class TestFlame_db(unittest.TestCase):
         self.assertEqual(1, is_corrct,
                              msg='Error when test weights')
             
-    def test_stop_iterations(self):
-        is_corrct = 1
-        try:
-            for early_stop_iterations in [2,3]:
-                res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                            holdout_data = holdout, # holdout set
-                            treatment_column_name= "Treated",
-                            outcome_column_name= 'outcome123',
-                            C = 0.1,
-                            conn = conn,
-                            matching_option = 0,
-                            adaptive_weights = 'decisiontree',
-                            verbose = 1,
-                            k = 0,
-                            early_stop_iterations = early_stop_iterations
-                            )
-                if check_statistics(res_post_new):
-                    is_corrct = 0
-            
-        except (KeyError, ValueError):
-                is_corrct = 0
-
-        self.assertEqual(1, is_corrct,
-                             msg='Error when test stop_iterations')
-
-    def test_missing_datasets(self):
-            is_corrct = 1
-            try:
-                for missing_data_replace in [0,1,2]:
-                    for missing_holdout_replace in [0,1]:
-                        holdout_miss = holdout.copy()
-                        m,n = holdout_miss.shape
-                        for i in range(int(m/100)):
-                            for j in [0,int(n/2)]:
-                                holdout_miss.iloc[i,j] = np.nan
-                        res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                                                holdout_data = holdout_miss, # holdout set
-                                                treatment_column_name= "Treated",
-                                                outcome_column_name= 'outcome123',
-                                                C = 0,
-                                                conn = conn,
-                                                matching_option = 1,
-                                                adaptive_weights = 'decisiontree',
-                                                verbose = 1,
-                                                missing_data_replace = missing_data_replace,
-                                                missing_holdout_replace = missing_holdout_replace)
-                        if check_statistics(res_post_new):
-                            is_corrct = 0
-
-            except (KeyError, ValueError):
-                    is_corrct = 0
-
-            self.assertEqual(1, is_corrct,
-                                 msg='Error when test missing datasets')
-
-        #     print(ATE_db(res_post_new))
-        #     print(ATT_db(res_post_new))        
+#    def test_stop_iterations(self):
+#        is_corrct = 1
+#        try:
+#            for early_stop_iterations in [2,3]:
+#                res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+#                            holdout_data = holdout, # holdout set
+#                            treatment_column_name= "Treated",
+#                            outcome_column_name= 'outcome123',
+#                            C = 0.1,
+#                            conn = conn,
+#                            matching_option = 0,
+#                            adaptive_weights = 'decisiontree',
+#                            verbose = 1,
+#                            k = 0,
+#                            early_stop_iterations = early_stop_iterations
+#                            )
+#                if check_statistics(res_post_new):
+#                    is_corrct = 0
+#            
+#        except (KeyError, ValueError):
+#                is_corrct = 0
+#
+#        self.assertEqual(1, is_corrct,
+#                             msg='Error when test stop_iterations')
+#
+#    def test_missing_datasets(self):
+#            is_corrct = 1
+#            try:
+#                for missing_data_replace in [0,1,2]:
+#                    for missing_holdout_replace in [0,1]:
+#                        holdout_miss = holdout.copy()
+#                        m,n = holdout_miss.shape
+#                        for i in range(int(m/100)):
+#                            for j in [0,int(n/2)]:
+#                                holdout_miss.iloc[i,j] = np.nan
+#                        res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+#                                                holdout_data = holdout_miss, # holdout set
+#                                                treatment_column_name= "Treated",
+#                                                outcome_column_name= 'outcome123',
+#                                                C = 0,
+#                                                conn = conn,
+#                                                matching_option = 1,
+#                                                adaptive_weights = 'decisiontree',
+#                                                verbose = 1,
+#                                                missing_data_replace = missing_data_replace,
+#                                                missing_holdout_replace = missing_holdout_replace)
+#                        if check_statistics(res_post_new):
+#                            is_corrct = 0
+#
+#            except (KeyError, ValueError):
+#                    is_corrct = 0
+#
+#            self.assertEqual(1, is_corrct,
+#                                 msg='Error when test missing datasets')
+#
+#        #     print(ATE_db(res_post_new))
+#        #     print(ATT_db(res_post_new))        
