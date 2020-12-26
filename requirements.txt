@@ -2,6 +2,5 @@ numpy>= 1.6.1
 pandas>=0.11.0
 scikit-learn>=0.23.2
 scipy>=0.14
-mysql.connector>=2.2.9
 psycopg2>=2.8.6
 pyodbc>=4.0.30
