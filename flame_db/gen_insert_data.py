@@ -1,4 +1,4 @@
-from matching_helpers import *
+from flame_db.matching_helpers import *
 
 
 #This function is to generate a theoretical dataset

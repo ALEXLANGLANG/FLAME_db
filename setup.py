@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 
 
-setuptools.setup(name='dame_flame',
+setuptools.setup(name='flame_db',
       version='0.32',
       description='Causal Inference Covariate Matching',
       long_description=long_description,
