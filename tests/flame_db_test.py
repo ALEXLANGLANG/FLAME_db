@@ -4,7 +4,10 @@ from gen_insert_data import *
 from FLAME_db_algorithm import *
 from matching_helpers import *
 from utils import *
-
+import unittest
+import pandas as pd
+import os
+import sys
 
 #Generate toy dataset
 p = 4
@@ -16,7 +19,7 @@ holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
-host = "127.0.0.1"
+host ="vcm-17819.vm.duke.edu" #"127.0.0.1"
 port = "5432"
 user="newuser"
 password= "sunxian123"
