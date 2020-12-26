@@ -11,7 +11,7 @@ import sys
 class TestFlame(unittest.TestCase):
     
     def test_large_C_repeats_F(self):
-        p = 4
+        p = 20
         TE = 5
         data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
         holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
