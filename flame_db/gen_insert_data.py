@@ -34,7 +34,7 @@ def gen_data_db(n = 250,p = 5, TE = 1):
     treated = np.random.binomial(1, 0.5, size = n)
     outcome =  TE * treated + np.random.normal(size = n)
     
-    for i in range(int(p)):
+    for i in range(int(p/2)):
         coeff = TE*(i+1)**1
         outcome  = outcome  +  coeff*covs[:,i]
         
@@ -68,7 +68,7 @@ def gen_data_db(n = 250,p = 5, TE = 1):
 
 
 #This function is to insert the dataset to the database
-def insert_data_to_db(table_name,data, conn, treatment_column_name,outcome_column_name):
+def insert_data_to_db(table_name,data, conn, treatment_column_name,outcome_column_name,add_missing = False):
     """
     Args:
         table_name (string, required parameter):
@@ -116,33 +116,32 @@ def insert_data_to_db(table_name,data, conn, treatment_column_name,outcome_colum
         values += ','.join(['{0}'.format(v) for v in data.iloc[i,-2:]])
 #         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
         cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
-        
-        
-    missing = data.iloc[:len(colnames),:].copy()
     
-    for i in range(missing.shape[1]):
-        missing.iloc[i,i] = "NULL" 
-    missing.loc[:,treatment_column_name] = '0'
-    missing = missing.append(missing)
-    missing.loc[:,treatment_column_name] = '1'
-    missing = missing.append(missing) 
-    
-    for i in range(missing.shape[0]):
-        col = ','.join(['{0}'.format(v) for v in colnames])
-        values = ''
-        
-        for k in range(len(missing.iloc[i,:-2])):
-            j = missing.iloc[i,k]
-            if j != 'NULL':
-                values += '\'' + j + '\''
-            if j == 'NULL':
-                values += j
-            values += ','
-            
+    if add_missing:      
+        missing = data.iloc[:len(colnames),:].copy()
 
-        values += ','.join(['{0}'.format(v) for v in missing.iloc[i,-2:]])
-#         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
-        cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
+        for i in range(missing.shape[1]):
+            missing.iloc[i,i] = "NULL" 
+        missing.loc[:,treatment_column_name] = '0'
+        missing = missing.append(missing)
+        missing.loc[:,treatment_column_name] = '1'
+        missing = missing.append(missing) 
+
+        for i in range(missing.shape[0]):
+            col = ','.join(['{0}'.format(v) for v in colnames])
+            values = ''
+
+            for k in range(len(missing.iloc[i,:-2])):
+                j = missing.iloc[i,k]
+                if j != 'NULL':
+                    values += '\'' + j + '\''
+                if j == 'NULL':
+                    values += j
+                values += ','
+
+            values += ','.join(['{0}'.format(v) for v in missing.iloc[i,-2:]])
+    #         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
+            cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
  
     conn.commit()
     print('Insert {} rows successfully to Database'.format(data.shape[0]  ))
