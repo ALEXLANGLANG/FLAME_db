@@ -78,27 +78,43 @@ insert_data_to_db("test_df", # The name of your table containing the dataset to 
                     data,
                     treatment_column_name= "Treated",
                     outcome_column_name= 'outcome123',conn = conn,add_missing = True)
-for missing_data_replace in [0,1,2]:
-    for missing_holdout_replace in [0,1]:
-        for C in [0,0.1]:
-            holdout_miss = holdout.copy()
-            m,n = holdout_miss.shape
-            for i in range(int(m/100)):
-                for j in [0,int(n/2)]:
-                    holdout_miss.iloc[i,j] = np.nan
-            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                                    holdout_data = holdout_miss, # holdout set
-                                    treatment_column_name= "Treated",
-                                    outcome_column_name= 'outcome123',
-                                    C = C,
-                                    conn = conn,
-                                    matching_option = 1,
-                                    adaptive_weights = 'decisiontree',
-                                    verbose = 1,
-                                    missing_data_replace = missing_data_replace,
-                                    missing_holdout_replace = missing_holdout_replace)
-            check_statistics(res_post_new)
-                                
+
+holdout_miss = holdout.copy()
+m,n = holdout_miss.shape
+for i in range(int(m/100)):
+    for j in [0,int(n/2)]:
+        holdout_miss.iloc[i,j] = np.nan
+res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+                        holdout_data = holdout_miss, # holdout set
+                        treatment_column_name= "Treated",
+                        outcome_column_name= 'outcome123',
+                        C = C,
+                        conn = conn,
+                        matching_option = 1,
+                        adaptive_weights = 'decisiontree',
+                        verbose = 1,
+                        missing_data_replace = 0,
+                        missing_holdout_replace = 0)
+check_statistics(res_post_new)
+
+
+holdout_miss = holdout.copy()
+m,n = holdout_miss.shape
+for i in range(int(m/100)):
+    for j in [0,int(n/2)]:
+        holdout_miss.iloc[i,j] = np.nan
+res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+                        holdout_data = holdout_miss, # holdout set
+                        treatment_column_name= "Treated",
+                        outcome_column_name= 'outcome123',
+                        C = C,
+                        conn = conn,
+                        matching_option = 1,
+                        adaptive_weights = 'decisiontree',
+                        verbose = 1,
+                        missing_data_replace = 1,
+                        missing_holdout_replace = 1)
+check_statistics(res_post_new)
 
 #for verbose in [0,1,2,3]:
 #    print(verbose)
