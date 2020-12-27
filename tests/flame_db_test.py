@@ -88,7 +88,7 @@ res_post_new = FLAME_db(input_data = "test_df", # The name of your table contain
                         holdout_data = holdout_miss, # holdout set
                         treatment_column_name= "Treated",
                         outcome_column_name= 'outcome123',
-                        C = C,
+                        C = 0,
                         conn = conn,
                         matching_option = 1,
                         adaptive_weights = 'decisiontree',
@@ -107,7 +107,7 @@ res_post_new = FLAME_db(input_data = "test_df", # The name of your table contain
                         holdout_data = holdout_miss, # holdout set
                         treatment_column_name= "Treated",
                         outcome_column_name= 'outcome123',
-                        C = C,
+                        C = 0.2,
                         conn = conn,
                         matching_option = 1,
                         adaptive_weights = 'decisiontree',
