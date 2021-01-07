@@ -109,8 +109,16 @@ def do_matched_covs(ds,level_matched, cov_l,un_matched_control,un_matched_treate
                                       'avg_outcome_control': np.float64, 'avg_outcome_treated':np.float64 })
                                                  
         ds.append(result_df)
+        print("*****************************************************")
+        print("before")
+        print(un_matched_control)
+        print(un_matched_treated)
+        
         un_matched_control -= result_df.loc[:,'num_control'].sum()
         un_matched_treated -= result_df.loc[:,'num_treated'].sum()
+        print("after")
+        print(un_matched_control)
+        print(un_matched_treated)
         level_matched.append(level)
         
     return (ds,level_matched,un_matched_control,un_matched_treated)

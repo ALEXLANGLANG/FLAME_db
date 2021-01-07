@@ -54,6 +54,7 @@ def run_main(db_name, holdout_df,treatment_column_name,outcome_column_name,
             ):
     
     #Add column "matched" to dataset
+    
     cur.execute('''ALTER TABLE {0} DROP COLUMN IF EXISTS is_matched;'''.format(db_name)) # reset the matched indicator to 0
     conn.commit()
     cur.execute('''ALTER TABLE {0} ADD COLUMN is_matched Integer;

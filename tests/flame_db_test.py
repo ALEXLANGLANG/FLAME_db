@@ -45,18 +45,18 @@ insert_data_to_db("test_df", # The name of your table containing the dataset to 
 
 is_corrct = 1
 
-
-res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-            holdout_data = holdout, # holdout set
-            treatment_column_name= "Treated",
-            outcome_column_name= 'outcome123',
-            C = 0.1,
-            conn = conn,
-            matching_option = 0,
-            verbose = 3,
-            k = 0
-            )
-check_statistics(res_post_new)
+#
+#res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+#            holdout_data = holdout, # holdout set
+#            treatment_column_name= "Treated",
+#            outcome_column_name= 'outcome123',
+#            C = 0.1,
+#            conn = conn,
+#            matching_option = 0,
+#            verbose = 3,
+#            k = 0
+#            )
+#check_statistics(res_post_new)
 
 #conn = connect_db(database_name, user, password, host, port)
 #
@@ -65,19 +65,19 @@ check_statistics(res_post_new)
 #                    data,
 #                    treatment_column_name= "Treated",
 #                    outcome_column_name= 'outcome123',conn = conn)
-res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-            holdout_data = holdout, # holdout set
-            treatment_column_name= "Treated",
-            outcome_column_name= 'outcome123',
-            C = 0.1,
-            conn = conn,
-            matching_option = 2,
-            adaptive_weights = False,
-            weight_array = weight_array,
-            verbose = 3,
-            k = 0
-            )
-check_statistics(res_post_new)
+#res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+#            holdout_data = holdout, # holdout set
+#            treatment_column_name= "Treated",
+#            outcome_column_name= 'outcome123',
+#            C = 0.1,
+#            conn = conn,
+#            matching_option = 2,
+#            adaptive_weights = False,
+#            weight_array = weight_array,
+#            verbose = 3,
+#            k = 0
+#            )
+#check_statistics(res_post_new)
 #conn = connect_db(database_name, user, password, host, port)
 #
 ##Insert the data into database
