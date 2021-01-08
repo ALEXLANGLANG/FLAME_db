@@ -97,7 +97,7 @@ check_statistics(res_post_new)
 insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
                     data,
                     treatment_column_name= "Treated",
-                    outcome_column_name= 'outcome123',conn = conn)
+                    outcome_column_name= 'outcome123',conn = conn,add_missing=True)
 holdout_miss = holdout.copy()
 m,n = holdout_miss.shape
 for i in range(int(m/100)):
