@@ -117,32 +117,32 @@ def insert_data_to_db(table_name,data, conn, treatment_column_name,outcome_colum
 #         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
         cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
     
-    if add_missing:      
-        missing = data.iloc[:len(colnames),:].copy()
-
-        for i in range(missing.shape[1]):
-            missing.iloc[i,i] = "NULL" 
-        missing.loc[:,treatment_column_name] = '0'
-        missing = missing.append(missing)
-        missing.loc[:,treatment_column_name] = '1'
-        missing = missing.append(missing) 
-
-        for i in range(missing.shape[0]):
-            col = ','.join(['{0}'.format(v) for v in colnames])
-            values = ''
-
-            for k in range(len(missing.iloc[i,:-2])):
-                j = missing.iloc[i,k]
-                if j != 'NULL':
-                    values += '\'' + j + '\''
-                if j == 'NULL':
-                    values += j
-                values += ','
-
-            values += ','.join(['{0}'.format(v) for v in missing.iloc[i,-2:]])
-    #         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
-            cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
- 
+#    if add_missing:      
+#        missing = data.iloc[:len(colnames),:].copy()
+#
+#        for i in range(missing.shape[1]):
+#            missing.iloc[i,i] = "NULL" 
+#        missing.loc[:,treatment_column_name] = '0'
+#        missing = missing.append(missing)
+#        missing.loc[:,treatment_column_name] = '1'
+#        missing = missing.append(missing) 
+#
+#        for i in range(missing.shape[0]):
+#            col = ','.join(['{0}'.format(v) for v in colnames])
+#            values = ''
+#
+#            for k in range(len(missing.iloc[i,:-2])):
+#                j = missing.iloc[i,k]
+#                if j != 'NULL':
+#                    values += '\'' + j + '\''
+#                if j == 'NULL':
+#                    values += j
+#                values += ','
+#
+#            values += ','.join(['{0}'.format(v) for v in missing.iloc[i,-2:]])
+#    #         print('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
+#            cur.execute('INSERT INTO '+  table +'('+ col +') VALUES (' + values + ')')
+# 
     conn.commit()
     print('Insert {} rows successfully to Database'.format(data.shape[0]  ))
 
