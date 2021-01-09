@@ -26,7 +26,7 @@ def check_statistics(res_post_new):
 
 p = 20
 TE = 5
-data,weight_array = gen_data_db(n = 5000,p = p, TE = TE)
+data,weight_array = gen_data_db(n = 1000,p = p, TE = TE)
 holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
