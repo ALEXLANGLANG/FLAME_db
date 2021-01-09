@@ -11,7 +11,8 @@ install:
 
 # command to run tests
 script:
-travis_wait 30  - nosetests  --with-coverage --cover-package=flame_db
+travis_wait 30 nosetests  --with-coverage --cover-package=flame_db
+nosetests  --with-coverage --cover-package=flame_db
 
 after_success:
   coveralls
