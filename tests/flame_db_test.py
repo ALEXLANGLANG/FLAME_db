@@ -109,7 +109,7 @@ res_post_new = FLAME_db(input_data = "test_df", # The name of your table contain
                         outcome_column_name= 'outcome123',
                         C = 0,
                         conn = conn,
-                        matching_option = 1,
+                        matching_option = 2,
                         adaptive_weights = 'decisiontree',
                         verbose = 1,
                         missing_data_replace = 0,
