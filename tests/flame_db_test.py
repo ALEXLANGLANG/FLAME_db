@@ -38,45 +38,45 @@ password= "sunxian123"
 conn = connect_db(database_name, user, password, host, port)
 
 #Insert the data into database
-#insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-#                    data,
-#                    treatment_column_name= "Treated",
-#                    outcome_column_name= 'outcome123',conn = conn)
+insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "Treated",
+                    outcome_column_name= 'outcome123',conn = conn)
+
+is_corrct = 1
 #
-#is_corrct = 1
 #
-#
-#res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#            holdout_data = holdout, # holdout set
-#            treatment_column_name= "Treated",
-#            outcome_column_name= 'outcome123',
-#            C = 0.1,
-#            conn = conn,
-#            matching_option = 0,
-#            verbose = 3,
-#            k = 0
-#            )
-#check_statistics(res_post_new)
+res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+            holdout_data = holdout, # holdout set
+            treatment_column_name= "Treated",
+            outcome_column_name= 'outcome123',
+            C = 0.1,
+            conn = conn,
+            matching_option = 0,
+            verbose = 3,
+            k = 0
+            )
+check_statistics(res_post_new)
 
 #conn = connect_db(database_name, user, password, host, port)
 #
 ##Insert the data into database
-#insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-#                    data,
-#                    treatment_column_name= "Treated",
-#                    outcome_column_name= 'outcome123',conn = conn)
-#res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#            holdout_data = holdout, # holdout set
-#            treatment_column_name= "Treated",
-#            outcome_column_name= 'outcome123',
-#            C = 0.1,
-#            conn = conn,
-#            matching_option = 2,
-#            adaptive_weights = False,
-#            weight_array = weight_array,
-#            verbose = 3,
-#            k = 0
-#            )
+insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "Treated",
+                    outcome_column_name= 'outcome123',conn = conn)
+res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+            holdout_data = holdout, # holdout set
+            treatment_column_name= "Treated",
+            outcome_column_name= 'outcome123',
+            C = 0.1,
+            conn = conn,
+            matching_option = 2,
+            adaptive_weights = False,
+            weight_array = weight_array,
+            verbose = 3,
+            k = 0
+            )
 #check_statistics(res_post_new)
 #conn = connect_db(database_name, user, password, host, port)
 #
@@ -135,28 +135,28 @@ check_statistics(res_post_new)
 #                        missing_holdout_replace = 1)
 #check_statistics(res_post_new)
 
-#for verbose in [0,1,2,3]:
-#    print(verbose)
-#    for matching_option in [0,1,2,3]:
-#        print(matching_option)
-#        #Test fixed weights
-#        for adaptive_weights in ['ridge', 'decisiontree',False]:
-#            print(adaptive_weights)
-#            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                        holdout_data = holdout, # holdout set
-#                        treatment_column_name= "Treated",
-#                        outcome_column_name= 'outcome123',
-#                        C = 0.1,
-#                        conn = conn,
-#                        matching_option = matching_option,
-#                        adaptive_weights = adaptive_weights,
-#                        weight_array = weight_array,
-#                        verbose = verbose,
-#                        k = 0
-#                        )
-#            if check_statistics(res_post_new):
-#                is_corrct = 0
-##
+for verbose in [0,1,2,3]:
+    print(verbose)
+    for matching_option in [0,1,2,3]:
+        print(matching_option)
+        #Test fixed weights
+        for adaptive_weights in ['ridge', 'decisiontree',False]:
+            print(adaptive_weights)
+            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+                        holdout_data = holdout, # holdout set
+                        treatment_column_name= "Treated",
+                        outcome_column_name= 'outcome123',
+                        C = 0.1,
+                        conn = conn,
+                        matching_option = matching_option,
+                        adaptive_weights = adaptive_weights,
+                        weight_array = weight_array,
+                        verbose = verbose,
+                        k = 0
+                        )
+            if check_statistics(res_post_new):
+                is_corrct = 0
+#
 
 
 
