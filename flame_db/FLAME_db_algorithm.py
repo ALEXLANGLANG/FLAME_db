@@ -169,7 +169,7 @@ def run_main(db_name, holdout_df,treatment_column_name,outcome_column_name,
             if not is_unimportant and flag_switch_bounday and matching_option == 0: 
                 flag_switch_bounday = False
                 res = do_matched_covs(ds,level_matched,cur_covs.keys(),un_matched_control,un_matched_treated,
-                                      db_name,k,level,cur,conn,treatment_column_name,outcome_column_name)
+                                      db_name,k,level-1,cur,conn,treatment_column_name,outcome_column_name)
                 (ds,level_matched,un_matched_control,un_matched_treated) = res
                 if  verbose == 2 or verbose ==3:
                     print("Found the boundary to switch to slowly dropping important covariates.")

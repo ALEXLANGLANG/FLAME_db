@@ -109,17 +109,28 @@ def do_matched_covs(ds,level_matched, cov_l,un_matched_control,un_matched_treate
                                       'avg_outcome_control': np.float64, 'avg_outcome_treated':np.float64 })
                                                  
         ds.append(result_df)
-        print("*****************************************************")
-        print("before")
-        print(un_matched_control)
-        print(un_matched_treated)
-        
+#         print("*****************************************************")
+#         print("before")
+#         print(un_matched_control)
+#         print(un_matched_treated)
+#         print(result_df.loc[:,'num_control'])
+#         print(result_df.loc[:,'num_treated'])
         un_matched_control -= result_df.loc[:,'num_control'].sum()
         un_matched_treated -= result_df.loc[:,'num_treated'].sum()
-        print("after")
-        print(un_matched_control)
-        print(un_matched_treated)
+#         print("after")
+#         print(un_matched_control)
+#         print(un_matched_treated)
         level_matched.append(level)
+        
+        cur.execute(''' select count(*)
+                        from {1}
+                        where is_matched = 0
+                        '''.format(','.join(['{0}'.format(v) for v in cov_l]), 
+                                  db_name, level, treatment_column_name,outcome_column_name) )
+        res_t = cur.fetchall()[0][0]        
+        
+        print("un_matched in total: ", res_t)
+        print("matched in total: ", 5000-res_t )
         
     return (ds,level_matched,un_matched_control,un_matched_treated)
 
