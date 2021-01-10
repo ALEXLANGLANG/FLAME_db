@@ -221,7 +221,7 @@ class Test_exceptions(unittest.TestCase):
                                     conn = conn,
                                     matching_option = 0,
                                     verbose = 3,
-                                    early_stop_un_t_frac = -1
+                                    early_stop_un_t_frac = -1,
                                     k = 0
                                     )
 
