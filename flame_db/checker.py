@@ -26,7 +26,7 @@ def read_files(input_data, holdout_data):
         df_holdout = pd.read_csv(holdout_data)
         
     else:
-        print("Please input your holdout_data")
+        raise Exception("Holdout_data shoule be a dataframe or a directory")
     
     df_holdout.columns = map(str, df_holdout.columns)
     
@@ -136,10 +136,10 @@ def check_parameters(df,adaptive_weights,weight_array,C, k, ratio, matching_opti
         raise Exception('Invalid input error. The verbose option must be'\
                         'the integer 0,1,2 or 3.') 
                                       
-    if not (isinstance(alpha, int) or isinstance(alpha, float)):
-        raise Exception('Invalid input error. The alpha  must be'\
-                'a number.')      
-    if not isinstance(max_depth, int):
+    if alpha < 0.0 or not (isinstance(alpha, int) or isinstance(alpha, float)):
+        raise Exception('Invalid input error. The alpha needs to be '\
+                            'positive for ridge regressions.')
+    if max_depth < 0.0 or not (isinstance(max_depth, int) or isinstance(max_depth, float)):
         raise Exception('Invalid input error. The max_depth must be'\
                 'a postive integer.')
     if not (isinstance(random_state, int) or random_state == None) :
