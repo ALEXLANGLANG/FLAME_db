@@ -11,11 +11,13 @@ install:
 jobs:
     include:
     - stage: "Tests"
-      name: "test1"
-      script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test1.py
-    - script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test.py
-      name: "test2"
-    
+      name: "testcheck1"
+      script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
+    - script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check.py
+      name: "testcheck2"
+    - script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main.py
+      name: "test main function"
+      
 
 
 # command to run tests
