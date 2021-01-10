@@ -17,9 +17,9 @@ jobs:
       name: "testcheck2"
     - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main.py
       name: "test main function"
-    - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_stops1.py
+    - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops1.py
       name: "test stops1"
-    - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_stops2.py
+    - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops2.py
       name: "test stops2"
 
 # command to run tests
