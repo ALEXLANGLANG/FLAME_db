@@ -129,8 +129,8 @@ def do_matched_covs(ds,level_matched, cov_l,un_matched_control,un_matched_treate
                                   db_name, level, treatment_column_name,outcome_column_name) )
         res_t = cur.fetchall()[0][0]        
         
-        print("un_matched in total: ", res_t)
-        print("matched in total: ", 5000-res_t )
+#         print("un_matched in total: ", res_t)
+#         print("matched in total: ", 5000-res_t )
         
     return (ds,level_matched,un_matched_control,un_matched_treated)
 
