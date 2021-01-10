@@ -90,7 +90,7 @@ class TestFlame_db(unittest.TestCase):
         is_corrct = 1
         try:
             #Insert the data into database
-            insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
+            insert_data_to_db("test_df21", # The name of your table containing the dataset to be matched
                                 data,
                                 treatment_column_name= "treated",
                                 outcome_column_name= 'outcome',conn = conn)
@@ -99,7 +99,7 @@ class TestFlame_db(unittest.TestCase):
             for i in range(int(m/100)):
                 for j in [0,int(n/2)]:
                     holdout_miss.iloc[i,j] = np.nan
-            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+            res_post_new = FLAME_db(input_data = "test_df21", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout_miss, # holdout set
                                     C = 0,
                                     conn = conn,

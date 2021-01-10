@@ -12,15 +12,19 @@ jobs:
     include:
     - stage: "Tests"
       name: "testcheck1"
-      script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
-    - script:  nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check.py
+      script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
+    - script:  travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check.py
+      name: "testcheck"
+    - script:  travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check2.py
       name: "testcheck2"
-    - script: nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main.py
+    - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main.py
       name: "test main function"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops1.py
       name: "test stops1"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops2.py
-#      name: "test stops2"
+      name: "test stops2"
+    - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops3.py
+      name: "test stops3"
 
 # command to run tests
 #script:
