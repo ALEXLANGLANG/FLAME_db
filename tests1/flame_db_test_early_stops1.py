@@ -105,20 +105,3 @@ res_post_new1 = FLAME_db(input_data = "test_df4", # The name of your table conta
                         k = 0,
                         early_stop_iterations = 1
                         )
-
-res_post_new1 = FLAME_db(input_data = "test_df4", # The name of your table containing the dataset to be matched
-                        holdout_data = holdout, # holdout set
-                        conn = conn,
-                        matching_option = 3,
-                        verbose = 3,
-                        k = 0,
-                        early_stop_un_c_frac = 1
-                        )
-res_post_new1 = FLAME_db(input_data = "test_df4", # The name of your table containing the dataset to be matched
-                        holdout_data = holdout, # holdout set
-                        conn = conn,
-                        matching_option = 3,
-                        verbose = 3,
-                        k = 0,
-                        early_stop_un_t_frac = 1
-                        )
