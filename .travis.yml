@@ -12,10 +12,10 @@ jobs:
     include:
     - stage: "Tests"
       name: "test1"
-      script: travis_wait 100 nosetests  --with-coverage tests1/flame_db_test1.py
-    - script: travis_wait 100 nosetests  --with-coverage tests1/flame_db_test.py
+      script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test1.py
+    - script: travis_wait 100 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test.py
       name: "test2"
-    - stage: "get coverage"
+    
 
 
 # command to run tests

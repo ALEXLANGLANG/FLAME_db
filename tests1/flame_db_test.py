@@ -210,13 +210,13 @@ class Test_exceptions(unittest.TestCase):
 #                                    k = 0
 #                                    )
 
-        with self.assertRaises(Exception) as early_stop_un_c_frac:
-            broken_early_stop_un_c_frac()
-            
-        self.assertTrue('The value provided for the early stopping critera '\
-                        'of proportion of unmatched control units needs to '\
-                        'be between 0.0 and 1.0' in str(early_stop_un_c_frac.exception))
-    
+#        with self.assertRaises(Exception) as early_stop_un_c_frac:
+#            broken_early_stop_un_c_frac()
+#            
+#        self.assertTrue('The value provided for the early stopping critera '\
+#                        'of proportion of unmatched control units needs to '\
+#                        'be between 0.0 and 1.0' in str(early_stop_un_c_frac.exception))
+#    
 
     def test_false_early_stop_pe(self):
         def broken_early_stop_pe():
