@@ -10,14 +10,13 @@ install:
 
 jobs:
     include:
-        - stage: "Tests1"
-          name: "1 test"
-          script:
+        -script: - travis_wait 100 nosetests  --with-coverage tests1/flame_db_test1.py
+        -script: - travis_wait 100 nosetests  --with-coverage tests1/flame_db_test.py
 
 # command to run tests
-script:
+#script:
 #travis_wait 30 nosetests  --with-coverage --cover-package=flame_db
- - travis_wait 100 nosetests  --with-coverage --cover-package=flame_db
+# - travis_wait 100 nosetests  --with-coverage --cover-package=flame_db
 
 after_success:
   coveralls
