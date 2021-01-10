@@ -8,6 +8,11 @@ install:
  - travis_wait pip install coverage
  - travis_wait pip install coveralls
 
+jobs:
+    include:
+        - stage: "Tests1"
+          name: "1 test"
+          script:
 
 # command to run tests
 script:
