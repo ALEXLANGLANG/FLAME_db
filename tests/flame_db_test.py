@@ -363,10 +363,6 @@ class Test_exceptions(unittest.TestCase):
         
     def test_false_weight_array_sum(self):
         def broken_weight_array_sum():
-            df, true_TE = generate_uniform_given_importance(num_control=100, num_treated=100)
-            model = matching.FLAME(adaptive_weights = False)
-            model.fit(holdout_data=df, weight_array = )
-            output = model.predict(df)
             res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "Treated",
