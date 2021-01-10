@@ -49,7 +49,7 @@ def gen_data_db(n = 250,p = 5, TE = 1):
 
 
     
-    col_names =['cov' + str(i+1) for i in range(p)] + ['Treated', 'outcome123']
+    col_names =['cov' + str(i+1) for i in range(p)] + ['treated', 'outcome']
     data = pd.DataFrame(data)
     data = data.astype(str)
     data.columns = col_names 
@@ -60,7 +60,7 @@ def gen_data_db(n = 250,p = 5, TE = 1):
                 data.iloc[i,j] = 'Good'
             else:
                 data.iloc[i,j] = 'Bad'
-    data = data.astype({"Treated": np.float64,"outcome123": np.float64})
+    data = data.astype({"treated": np.float64,"outcome": np.float64})
 #     data = data.astype({})
 
 

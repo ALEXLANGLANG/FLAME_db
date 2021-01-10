@@ -328,12 +328,13 @@ def FLAME_db(input_data, holdout_data,conn, treatment_column_name = "treated", o
     # Check if  input in the database and holdout have legal data type
     check_parameters(holdout_data,adaptive_weights,weight_array,C, k, ratio, matching_option,verbose,alpha, max_depth,
                          random_state, missing_data_replace, missing_holdout_replace) 
+    check_stops(early_stop_un_c_frac, early_stop_un_t_frac, early_stop_pe, early_stop_pe_frac)
     check_missings(input_data, holdout_data, conn, missing_data_replace, 
                missing_holdout_replace, treatment_column_name, outcome_column_name) 
 
     check_holdout_file(holdout_data, treatment_column_name, outcome_column_name)
     check_input_file(input_data, cur, conn, treatment_column_name, outcome_column_name)
-    
+
    
 
 

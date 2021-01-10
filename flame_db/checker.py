@@ -60,7 +60,7 @@ def check_holdout_file(df, treatment_column_name, outcome_column_name):
 
 
 def check_stops(early_stop_un_c_frac, early_stop_un_t_frac, early_stop_pe, early_stop_pe_frac, 
-                early_stop_iterations):
+                early_stop_iterations = None):
     """Check the parameters passed to DAME/FLAME relating to early stopping"""
     
     # todo: add check for epsilon on FLAME
@@ -83,10 +83,7 @@ def check_stops(early_stop_un_c_frac, early_stop_un_t_frac, early_stop_pe, early
     if ((early_stop_pe_frac > 1.0) or (early_stop_pe_frac < 0.0)):
         raise Exception('The value provided for the early stopping critera of'\
                         ' proportion of PE needs to be between 0.0 and 1.0')
-
-    if (type(early_stop_iterations) != int):
-        raise Exception('The value provided for early_stop_iteration needs '\
-                        'to be an integer number of iterations')        
+     
         
     return 
 
@@ -142,7 +139,7 @@ def check_parameters(df,adaptive_weights,weight_array,C, k, ratio, matching_opti
     if max_depth < 0.0 or not (isinstance(max_depth, int) or isinstance(max_depth, float)):
         raise Exception('Invalid input error. The max_depth must be'\
                 'a postive integer.')
-    if not (isinstance(random_state, int) or random_state == None) :
+    if (random_state!= None and random_state < 0.0) or not (isinstance(random_state, int) or random_state == None) :
         raise Exception('Invalid input error. The random_state  must be'\
                 'a postive integer or None.')
     if  missing_data_replace not in [0,1,2]:                  
