@@ -37,18 +37,18 @@ port = "5432"
 user="newuser"
 password= "sunxian123"
 conn = connect_db(database_name, user, password, host, port)
-
+#Insert the data into database
+insert_data_to_db("test_df100", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "treated",
+                    outcome_column_name= 'outcome',conn = conn)
 class TestFlame_db(unittest.TestCase):
               
     def test_weights(self):
         is_corrct = 1
         try:
             
-            #Insert the data into database
-            insert_data_to_db("test_df100", # The name of your table containing the dataset to be matched
-                                data,
-                                treatment_column_name= "treated",
-                                outcome_column_name= 'outcome',conn = conn)
+
             res_post_new1 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
@@ -59,12 +59,12 @@ class TestFlame_db(unittest.TestCase):
                                     verbose = 3,
                                     k = 0
                                     )
-            #Insert the data into database
-            insert_data_to_db("test_df101", # The name of your table containing the dataset to be matched
-                                data,
-                                treatment_column_name= "treated",
-                                outcome_column_name= 'outcome',conn = conn)
-            res_post_new2 = FLAME_db(input_data = "test_df101", # The name of your table containing the dataset to be matched
+#            #Insert the data into database
+#            insert_data_to_db("test_df100", # The name of your table containing the dataset to be matched
+#                                data,
+#                                treatment_column_name= "treated",
+#                                outcome_column_name= 'outcome',conn = conn)
+            res_post_new2 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',
@@ -89,17 +89,13 @@ class TestFlame_db(unittest.TestCase):
     def test_missing_datasets(self):
         is_corrct = 1
         try:
-            #Insert the data into database
-            insert_data_to_db("test_df102", # The name of your table containing the dataset to be matched
-                                data,
-                                treatment_column_name= "treated",
-                                outcome_column_name= 'outcome',conn = conn)
+
             holdout_miss = holdout.copy()
             m,n = holdout_miss.shape
             for i in range(int(m/100)):
                 for j in [0,int(n/2)]:
                     holdout_miss.iloc[i,j] = np.nan
-            res_post_new = FLAME_db(input_data = "test_df102", # The name of your table containing the dataset to be matched
+            res_post_new = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout_miss, # holdout set
                                     C = 0,
                                     conn = conn,
