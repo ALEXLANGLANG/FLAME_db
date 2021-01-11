@@ -42,6 +42,10 @@ insert_data_to_db("test_df100", # The name of your table containing the dataset 
                     data,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn)
+insert_data_to_db("test_df101", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "treated",
+                    outcome_column_name= 'outcome',conn = conn)
 class TestFlame_db(unittest.TestCase):
               
     def test_weights(self):
@@ -51,13 +55,24 @@ class TestFlame_db(unittest.TestCase):
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',
+                                    adaptive_weights = 'ridge'
                                     C = 0.1,
                                     conn = conn,
                                     matching_option = 0,
                                     verbose = 3,
                                     k = 0
                                     )
-
+            
+            res_post_new1 = FLAME_db(input_data = "test_df101", # The name of your table containing the dataset to be matched
+                                    holdout_data = 'holdout.csv', # holdout set
+                                    treatment_column_name= "treated",
+                                    outcome_column_name= 'outcome',
+                                    C = 0.1,
+                                    conn = conn,
+                                    matching_option = 0,
+                                    verbose = 3,
+                                    k = 0
+                                    )
 #            res_post_new2 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
 #                                    holdout_data = holdout, # holdout set
 #                                    treatment_column_name= "treated",

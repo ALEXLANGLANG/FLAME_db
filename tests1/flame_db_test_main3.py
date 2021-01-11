@@ -70,31 +70,3 @@ class TestFlame_db(unittest.TestCase):
                              msg='Error when test weights')
 
 
-#    def test_missing_datasets(self):
-#        is_corrct = 1
-#        try:
-#
-#            holdout_miss = holdout.copy()
-#            m,n = holdout_miss.shape
-#            for i in range(int(m/100)):
-#                for j in [0,int(n/2)]:
-#                    holdout_miss.iloc[i,j] = np.nan
-#            res_post_new = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout_miss, # holdout set
-#                                    C = 0,
-#                                    conn = conn,
-#                                    matching_option = 2,
-#                                    adaptive_weights = 'decisiontree',
-#                                    verbose = 1,
-#                                    missing_data_replace = 0,
-#                                    missing_holdout_replace = 0)
-#            if check_statistics(res_post_new):
-#                is_corrct = 0
-#
-#        except (KeyError, ValueError):
-#                is_corrct = 0
-#
-#        self.assertEqual(1, is_corrct,
-#                             msg='Error when test missing datasets')
-
-

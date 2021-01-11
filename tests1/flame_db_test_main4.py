@@ -42,6 +42,11 @@ insert_data_to_db("test_df400", # The name of your table containing the dataset 
                     data,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn, add_missing = True)
+#Insert the data into database
+insert_data_to_db("test_df401", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "treated",
+                    outcome_column_name= 'outcome',conn = conn, add_missing = True)
                     
 class TestFlame_db(unittest.TestCase):
               
@@ -56,6 +61,30 @@ class TestFlame_db(unittest.TestCase):
                                     C = 0.1,
                                     conn = conn,
                                     matching_option = 2,
+                                    verbose = 3,
+                                    k = 0
+                                    )
+            if  check_statistics(res_post_new2):
+                is_corrct = 0
+            
+        except (KeyError, ValueError):
+                is_corrct = 0
+
+        self.assertEqual(1, is_corrct,
+                             msg='Error when missing data in database')
+                             
+    def test_missing2(self):
+        is_corrct = 1
+        try:
+
+            res_post_new2 = FLAME_db(input_data = "test_df401", # The name of your table containing the dataset to be matched
+                                    holdout_data = holdout, # holdout set
+                                    treatment_column_name= "treated",
+                                    outcome_column_name= 'outcome',
+                                    C = 0.1,
+                                    conn = conn,
+                                    matching_option = 2,
+                                    missing_data_replace = 1
                                     verbose = 3,
                                     k = 0
                                     )

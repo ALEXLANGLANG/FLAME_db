@@ -9,13 +9,10 @@ import pandas as pd
 import os
 import sys
 
-p = 4
+p = 5
 TE = 5
-
 data,weight_array = gen_data_db(n = 100,p = p, TE = TE)
 holdout,weight_array = gen_data_db(n = 50,p = p, TE = TE)
-data[data.loc[:,'treated'] ==1] = 0
-data.loc[1,'treated'] = 1
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
