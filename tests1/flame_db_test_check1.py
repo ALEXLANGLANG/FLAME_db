@@ -216,3 +216,14 @@ class Test_exceptions(unittest.TestCase):
 
         self.assertTrue('The value provided for the early stopping critera of'\
                         ' proportion of PE needs to be between 0.0 and 1.0' in str(early_stop_pe_frac.exception))
+                        
+    def test_false_select_database(self):
+        def broken_select_database():
+            conn = connect_db(database_name, user, password, host, port,select_db = "WRONG")
+
+        with self.assertRaises(Exception) as select_database:
+            broken_select_database()
+
+        self.assertTrue("please select the database you are using " in str(select_database.exception))
+                        
+
