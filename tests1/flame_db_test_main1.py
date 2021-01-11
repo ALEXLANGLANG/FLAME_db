@@ -62,9 +62,10 @@ class TestFlame_db(unittest.TestCase):
                                     verbose = 3,
                                     k = 0
                                     )
+            holdout_path = os.path.join((os.path.dirname(__file__)), 'holdout.csv')
             
             res_post_new1 = FLAME_db(input_data = "test_df101", # The name of your table containing the dataset to be matched
-                                    holdout_data = 'holdout.csv', # holdout set
+                                    holdout_data = holdout_path, # holdout set
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',
                                     C = 0.1,
