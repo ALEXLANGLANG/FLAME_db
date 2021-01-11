@@ -22,7 +22,7 @@ def read_files(input_data, holdout_data):
     # Now read the holdout data
     if (type(holdout_data) == pd.core.frame.DataFrame):
         df_holdout = holdout_data
-    elif (type(holdout_data) == str()):
+    elif (type(holdout_data) == str):
         df_holdout = pd.read_csv(holdout_data)
         
     else:
