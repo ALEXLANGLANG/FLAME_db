@@ -38,223 +38,9 @@ user="newuser"
 password= "sunxian123"
 conn = connect_db(database_name, user, password, host, port)
 
-#class TestFlame_db(unittest.TestCase):
-#              
-#    def test_weights(self):
-#        is_corrct = 1
-#        try:
-#            
-#            #Insert the data into database
-#            insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-#                                data,
-#                                treatment_column_name= "treated",
-#                                outcome_column_name= 'outcome',conn = conn)
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    treatment_column_name= "treated",
-#                                    outcome_column_name= 'outcome',
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 0,
-#                                    verbose = 3,
-#                                    k = 0
-#                                    )
-#            res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    treatment_column_name= "treated",
-#                                    outcome_column_name= 'outcome',
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 2,
-#                                    adaptive_weights = False,
-#                                    weight_array = weight_array,
-#                                    verbose = 3,
-#                                    k = 0
-#                                    )
-#            if check_statistics(res_post_new1) or check_statistics(res_post_new2):
-#                is_corrct = 0
-#            
-#        except (KeyError, ValueError):
-#                is_corrct = 0
-#
-#        self.assertEqual(1, is_corrct,
-#                             msg='Error when test weights')
-#
-#
-#    def test_missing_datasets(self):
-#        is_corrct = 1
-#        try:
-#            holdout_miss = holdout.copy()
-#            m,n = holdout_miss.shape
-#            for i in range(int(m/100)):
-#                for j in [0,int(n/2)]:
-#                    holdout_miss.iloc[i,j] = np.nan
-#            res_post_new = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout_miss, # holdout set
-#                                    C = 0,
-#                                    conn = conn,
-#                                    matching_option = 2,
-#                                    adaptive_weights = 'decisiontree',
-#                                    verbose = 1,
-#                                    missing_data_replace = 0,
-#                                    missing_holdout_replace = 0)
-#            if check_statistics(res_post_new):
-#                is_corrct = 0
-#
-#        except (KeyError, ValueError):
-#                is_corrct = 0
-#
-#        self.assertEqual(1, is_corrct,
-#                             msg='Error when test missing datasets')
-#
-#
+
 class Test_exceptions(unittest.TestCase):
     
-#    def test_false_dataset(self):
-#        def broken_false_dataset():
-#            res_post_new1 = FLAME_db(input_data = data, # The name of your table containing the dataset to be matched
-#                                                holdout_data = holdout, # holdout set
-#                                                C = 0.1,
-#                                                conn = conn,
-#                                                matching_option = 0,
-#                                                verbose = 3,
-#                                                k = 0
-#                                                )
-#        with self.assertRaises(Exception) as false_dataset:
-#            broken_false_dataset()
-#
-#        self.assertTrue("Need to specify the name of the table that contains the dataset in your database "\
-#                        "frame in parameter 'input_data'" in str(false_dataset.exception))
-#
-#    def test_false_holdout(self):
-#        def broken_false_holdout():
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                                holdout_data = 0, # holdout set
-#                                                C = 0.1,
-#                                                conn = conn,
-#                                                matching_option = 0,
-#                                                verbose = 3,
-#                                                k = 0
-#                                                )
-#        with self.assertRaises(Exception) as holdout:
-#            broken_false_holdout()
-#
-#        self.assertTrue("Holdout_data shoule be a dataframe or a directory" in str(holdout.exception))
-#
-#
-#    def test_false_treatment_column_name(self):
-#        def broken_treatment_column_name():
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                                holdout_data = holdout, # holdout set
-#                                                treatment_column_name= "sadfdag",
-#                                                C = 0.1,
-#                                                conn = conn,
-#                                                matching_option = 0,
-#                                                verbose = 3,
-#                                                k = 0
-#                                                )
-#        with self.assertRaises(Exception) as treatment_column_name:
-#            broken_treatment_column_name()
-#
-#        self.assertTrue('Invalid input error. Treatment column name does not'\
-#                        ' exist' in str(treatment_column_name.exception))
-#
-#    def test_false_outcome_column_name(self):
-#        def broken_outcome_column_name():
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    outcome_column_name= '1232114',
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 0,
-#                                    verbose = 3,
-#                                    k = 0
-#                                    )
-#
-#        with self.assertRaises(Exception) as outcome_column_name:
-#            broken_outcome_column_name()
-#
-#        self.assertTrue('Invalid input error. Outcome column name does not'\
-#                        ' exist' in str(outcome_column_name.exception))
-#
-#
-#
-#    def test_false_early_stop_un_t_frac(self):
-#        def broken_early_stop_un_t_frac():
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 0,
-#                                    verbose = 3,
-#                                    early_stop_un_t_frac = -1,
-#                                    k = 0
-#                                    )
-#
-#        with self.assertRaises(Exception) as early_stop_un_t_frac:
-#            broken_early_stop_un_t_frac()
-#
-#        self.assertTrue('The value provided for the early stopping critera '\
-#                        'of proportion of unmatched treatment units needs to '\
-#                        'be between 0.0 and 1.0' in str(early_stop_un_t_frac.exception))
-#
-#    def test_false_early_stop_un_c_frac(self):
-#        def broken_early_stop_un_c_frac():
-#            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 0,
-#                                    verbose = 3,
-#                                    early_stop_un_c_frac=-1,
-#                                    k = 0
-#                                    )
-
-#        with self.assertRaises(Exception) as early_stop_un_c_frac:
-#            broken_early_stop_un_c_frac()
-#            
-#        self.assertTrue('The value provided for the early stopping critera '\
-#                        'of proportion of unmatched control units needs to '\
-#                        'be between 0.0 and 1.0' in str(early_stop_un_c_frac.exception))
-#    
-
-    def test_false_early_stop_pe(self):
-        def broken_early_stop_pe():
-            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                                    holdout_data = holdout, # holdout set
-                                    C = 0.1,
-                                    conn = conn,
-                                    matching_option = 0,
-                                    verbose = 3,
-                                    early_stop_pe = -10,
-                                    k = 0
-                                    )
-
-        with self.assertRaises(Exception) as early_stop_pe:
-            broken_early_stop_pe()
-            
-        self.assertTrue('The value provided for the early stopping critera '\
-                        'of PE needs to be non-negative ' in str(early_stop_pe.exception))
-
-    def test_false_early_stop_pe_frac(self):
-        def broken_early_stop_pe_frac():
-            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-                                    holdout_data = holdout, # holdout set
-                                    C = 0.1,
-                                    conn = conn,
-                                    matching_option = 0,
-                                    verbose = 3,
-                                    early_stop_pe_frac=-1,
-                                    k = 0
-                                    )
-
-        with self.assertRaises(Exception) as early_stop_pe_frac:
-            broken_early_stop_pe_frac()
-            
-        self.assertTrue('The value provided for the early stopping critera of'\
-                        ' proportion of PE needs to be between 0.0 and 1.0' in str(early_stop_pe_frac.exception))
-        
-        
     def test_false_weights_type(self):
         def broken_weights_type():
             res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
@@ -422,6 +208,7 @@ class Test_exceptions(unittest.TestCase):
             res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     conn = conn,
+                                    verbose = 3,
                                     random_state = -1000
                                     )
         with self.assertRaises(Exception) as random_state:
@@ -437,6 +224,7 @@ class Test_exceptions(unittest.TestCase):
             res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     conn = conn,
+                                    verbose = 3,
                                     missing_data_replace =4
                                     )
         with self.assertRaises(Exception) as missing_data_replace:
@@ -450,6 +238,7 @@ class Test_exceptions(unittest.TestCase):
             res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     conn = conn,
+                                    verbose = 3,
                                     missing_holdout_replace =4
                                     )
         with self.assertRaises(Exception) as missing_holdout_replace:
@@ -478,23 +267,23 @@ class Test_exceptions(unittest.TestCase):
         self.assertTrue('Invalid input error. All rows in the treatment '\
                         'column must have either a 0 or a 1 value.' in str(treatment_column_name_value.exception))
         
-#    def test_false_input_treatment_value(self):
-#        def broken_input_treatment_value():
-#            df = data.copy()
-#            df.loc[0,'treated'] = 4
-#            insert_data_to_db("test_df", # The name of your table containing the dataset to be matched
-#                    df,
-#                    treatment_column_name= "treated",
-#                    outcome_column_name= 'outcome',conn = conn)
-#            
-#            res_post_new2 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    conn = conn
-#                                    )
-#        with self.assertRaises(Exception) as input_treatment_value:
-#            broken_input_treatment_value()
-#            
-#        self.assertTrue('Invalid input error. All rows in the treatment '\
-#                        'column must have either a 0 or a 1 value.'in str(input_treatment_value.exception))
-#        
+    def test_false_input_treatment_value(self):
+        def broken_input_treatment_value():
+            df = data.copy()
+            df.loc[0,'treated'] = 4
+            insert_data_to_db("test_df_treatment", # The name of your table containing the dataset to be matched
+                    df,
+                    treatment_column_name= "treated",
+                    outcome_column_name= 'outcome',conn = conn)
+            
+            res_post_new2 = FLAME_db(input_data = "test_df_treatment", # The name of your table containing the dataset to be matched
+                                    holdout_data = holdout, # holdout set
+                                    conn = conn
+                                    )
+        with self.assertRaises(Exception) as input_treatment_value:
+            broken_input_treatment_value()
+            
+        self.assertTrue('Invalid input error. All rows in the treatment '\
+                        'column must have either a 0 or a 1 value.'in str(input_treatment_value.exception))
+        
 #        

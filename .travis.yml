@@ -15,8 +15,6 @@ jobs:
       script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
     - script:  travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check.py
       name: "testcheck"
-    - script:  travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check2.py
-      name: "testcheck2"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main.py
       name: "test main function"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_early_stops1.py
