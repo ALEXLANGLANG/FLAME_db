@@ -29,6 +29,7 @@ TE = 5
 gen_data_db(n = 100,p = 2, TE = TE)
 data,weight_array = gen_data_db(n = 1000,p = p, TE = TE)
 holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
+
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
