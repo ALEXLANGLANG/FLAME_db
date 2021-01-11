@@ -55,7 +55,7 @@ class TestFlame_db(unittest.TestCase):
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',
-                                    adaptive_weights = 'ridge'
+                                    adaptive_weights = 'ridge',
                                     C = 0.1,
                                     conn = conn,
                                     matching_option = 0,

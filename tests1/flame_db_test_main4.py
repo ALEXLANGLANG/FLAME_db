@@ -84,7 +84,7 @@ class TestFlame_db(unittest.TestCase):
                                     C = 0.1,
                                     conn = conn,
                                     matching_option = 2,
-                                    missing_data_replace = 1
+                                    missing_data_replace = 1,
                                     verbose = 3,
                                     k = 0
                                     )
