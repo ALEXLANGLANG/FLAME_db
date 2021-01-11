@@ -38,7 +38,7 @@ user="newuser"
 password= "sunxian123"
 conn = connect_db(database_name, user, password, host, port)
 #Insert the data into database
-insert_data_to_db("test_df100", # The name of your table containing the dataset to be matched
+insert_data_to_db("test_df300", # The name of your table containing the dataset to be matched
                     data,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn)
@@ -47,30 +47,20 @@ class TestFlame_db(unittest.TestCase):
     def test_weights(self):
         is_corrct = 1
         try:
-            res_post_new1 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
+
+            res_post_new2 = FLAME_db(input_data = "test_df300", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',
                                     C = 0.1,
                                     conn = conn,
-                                    matching_option = 0,
+                                    matching_option = 2,
+                                    adaptive_weights = False,
+                                    weight_array = weight_array,
                                     verbose = 3,
                                     k = 0
                                     )
-
-#            res_post_new2 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout, # holdout set
-#                                    treatment_column_name= "treated",
-#                                    outcome_column_name= 'outcome',
-#                                    C = 0.1,
-#                                    conn = conn,
-#                                    matching_option = 2,
-#                                    adaptive_weights = False,
-#                                    weight_array = weight_array,
-#                                    verbose = 3,
-#                                    k = 0
-#                                    )
-            if check_statistics(res_post_new1):  #or check_statistics(res_post_new2):
+            if  check_statistics(res_post_new2):
                 is_corrct = 0
             
         except (KeyError, ValueError):
