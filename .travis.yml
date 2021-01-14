@@ -2,7 +2,6 @@ language: python
 python:
   - "3.6.5"
 
-
 services:
   - postgresql
   
@@ -17,11 +16,15 @@ install:
  - travis_wait pip install coveralls
  
 
-  
+
 jobs:
     include:
-    - before_script:
-      psql -c 'create database tmp;' -U postgres
+    - stage: "setup"
+        name: "sql"
+        before_script:
+          psql -c 'create database tmp;' -U postgres
+        
+        
     - stage: "Tests"
       name: "testcheck1"
       script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
