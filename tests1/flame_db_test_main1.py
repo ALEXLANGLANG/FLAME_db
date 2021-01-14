@@ -93,13 +93,13 @@ class TestFlame_db(unittest.TestCase):
             port = "5432"
             user="newuser"
             password= "sunxian123"
-            conn = connect_db(database_name, user, password, host, port)
+            conn = connect_db(database_name, user, password, host, port, select_db = "MySQL")
             #Insert the data into database
 
             insert_data_to_db("test_df101", # The name of your table containing the dataset to be matched
                                 data,
                                 treatment_column_name= "treated",
-                                outcome_column_name= 'outcome',conn = conn, select_db = "MySQL")
+                                outcome_column_name= 'outcome',conn = conn)
             res_post_new1 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
