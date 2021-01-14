@@ -23,7 +23,9 @@ setuptools.setup(name='flame_db',
           'numpy>=1.6.1'
       ],
       extras_require={
-        "SQL":  ["psycopg2>=2.8.6"],
+        "postgreSQL":  ["psycopg2>=2.8.6"],
+        "sqlserver":  ["pyodbc>=4.0.0"],
+        "mySQL":  ["mysql.connector>=8.0.17"]
     }
      long_description_content_type="text/markdown",
      classifiers=[
