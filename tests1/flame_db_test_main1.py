@@ -84,43 +84,43 @@ class TestFlame_db(unittest.TestCase):
         self.assertEqual(1, is_corrct,
                              msg='Error when test weights')
                              
-    def test_MySQL(self):
-        is_corrct = 1
-        try:
-            # Select the database you are using
-            database_name='tmp' # database name
-            host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
-            port = "5432"
-            user="newuser"
-            password= "sunxian123"
-            conn = connect_db(database_name, user, password, host, port, select_db = "MySQL")
-            #Insert the data into database
-
-            insert_data_to_db("test_df101", # The name of your table containing the dataset to be matched
-                                data,
-                                treatment_column_name= "treated",
-                                outcome_column_name= 'outcome',conn = conn)
-            res_post_new1 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
-                                    holdout_data = holdout, # holdout set
-                                    treatment_column_name= "treated",
-                                    outcome_column_name= 'outcome',
-                                    adaptive_weights = 'ridge',
-                                    C = 0.1,
-                                    conn = conn,
-                                    matching_option = 0,
-                                    verbose = 3,
-                                    k = 0
-                                    )
-
-
-            if check_statistics(res_post_new1):  #or check_statistics(res_post_new2):
-                is_corrct = 0
-            
-        except (KeyError, ValueError):
-                is_corrct = 0
-
-        self.assertEqual(1, is_corrct,
-                             msg='Error when test MySQL')
+#    def test_MySQL(self):
+#        is_corrct = 1
+#        try:
+#            # Select the database you are using
+#            database_name='tmp' # database name
+#            host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+#            port = "5432"
+#            user="newuser"
+#            password= "sunxian123"
+#            conn = connect_db(database_name, user, password, host, port, select_db = "MySQL")
+#            #Insert the data into database
+#
+#            insert_data_to_db("test_df101", # The name of your table containing the dataset to be matched
+#                                data,
+#                                treatment_column_name= "treated",
+#                                outcome_column_name= 'outcome',conn = conn)
+#            res_post_new1 = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
+#                                    holdout_data = holdout, # holdout set
+#                                    treatment_column_name= "treated",
+#                                    outcome_column_name= 'outcome',
+#                                    adaptive_weights = 'ridge',
+#                                    C = 0.1,
+#                                    conn = conn,
+#                                    matching_option = 0,
+#                                    verbose = 3,
+#                                    k = 0
+#                                    )
+#
+#
+#            if check_statistics(res_post_new1):  #or check_statistics(res_post_new2):
+#                is_corrct = 0
+#            
+#        except (KeyError, ValueError):
+#                is_corrct = 0
+#
+#        self.assertEqual(1, is_corrct,
+#                             msg='Error when test MySQL')
 
                     
                     
