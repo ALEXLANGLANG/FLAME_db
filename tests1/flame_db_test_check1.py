@@ -29,13 +29,14 @@ TE = 5
 gen_data_db(n = 100,p = 2, TE = TE)
 data,weight_array = gen_data_db(n = 100,p = p, TE = TE)
 holdout,weight_array = gen_data_db(n = 50,p = p, TE = TE)
+
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
-host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+host = 'localhost' #host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
 port = "5432"
-user="newuser"
-password= "sunxian123"
+user="postgres"
+password= ""
 conn = connect_db(database_name, user, password, host, port)
 
 
