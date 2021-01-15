@@ -5,8 +5,7 @@ python:
 services:
   - postgresql
 
-before_script:
-  - psql -c 'create database tmp;' -U postgres
+
 
 
 # command to install dependencies
@@ -18,11 +17,14 @@ install:
 
 jobs:
     include:
-    - stage: "Tests"
-      name: "test main function1"
-    - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main1.py
-    - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
-      name: "testcheck1"
+    
+    - name: "test main function1"
+      before_script: psql -c 'create database tmp;' -U postgres
+      script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main1.py
+    
+    - name: "testcheck1"
+      before_script: psql -c 'create database tmp;' -U postgres
+      script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
 #    - script:  travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check.py
 #      name: "testcheck"
 
