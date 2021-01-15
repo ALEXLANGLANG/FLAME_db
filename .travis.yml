@@ -32,7 +32,7 @@ jobs:
 #      before_script: psql -c 'create database tmp;' -U postgres
 #      script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main2.py
     - name: "test main function3 mysql"
-      before_script: mysql -e 'CREATE DATABASE IF NOT EXISTS tmp;'
+      before_script: mysql -e 'CREATE DATABASE IF NOT EXISTS tmp ;'
       script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main3.py
 #    - name: "test main function4"
 #      before_script: psql -c 'create database tmp;' -U postgres

@@ -34,7 +34,7 @@ select_db = "MySQL"  # Select the database you are using
 database_name='tmp' # database name
 host = 'localhost' #host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
 port = "5432"
-user="newuser"
+user="travis"
 password= ""
 conn = connect_db(database_name, user, password, host, port,select_db = "MySQL")
 #Insert the data into database
