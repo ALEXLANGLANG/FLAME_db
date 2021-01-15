@@ -11,6 +11,7 @@ services:
 
 # command to install dependencies
 install:
+ - travis_wait pip install -r opt-requirements.txt
  - travis_wait pip install -r requirements.txt
  - travis_wait pip install coverage
  - travis_wait pip install coveralls
