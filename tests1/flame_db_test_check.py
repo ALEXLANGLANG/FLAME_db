@@ -253,7 +253,7 @@ class Test_exceptions(unittest.TestCase):
     def test_false_treatment_column_name_value(self):
         def broken_treatment_column_name_value():
             insert_data_to_db("test_df_t", # The name of your table containing the dataset to be matched
-                                    df,
+                                    data,
                                     treatment_column_name= "treated",
                                     outcome_column_name= 'outcome',conn = conn)
             df = holdout.copy()
@@ -266,7 +266,6 @@ class Test_exceptions(unittest.TestCase):
                                     verbose = 3,
                                     k = 0
                                     )
-
         with self.assertRaises(Exception) as treatment_column_name_value:
             broken_treatment_column_name_value()
         self.assertTrue('Invalid input error. All rows in the treatment '\
