@@ -15,11 +15,10 @@ install:
 
 
 jobs:
-
-
     include:
     - stage: "Tests"
     - before_script: psql -c 'create database tmp;' -U postgres
+      name: "create database"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_main1.py
       name: "test main function1"
     - script: travis_wait 30 nosetests  --with-coverage --cover-package=flame_db tests1/flame_db_test_check1.py
