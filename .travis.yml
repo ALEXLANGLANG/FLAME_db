@@ -9,8 +9,7 @@ services:
 
 # command to install dependencies
 install:
-# - travis_wait pip install -r requirements.txt
-# - pip install mysql-connector-python-rf
+ - travis_wait pip install -r requirements.txt
  - travis_wait pip install coverage
  - travis_wait pip install coveralls
  
