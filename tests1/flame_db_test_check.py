@@ -252,9 +252,13 @@ class Test_exceptions(unittest.TestCase):
         
     def test_false_treatment_column_name_value(self):
         def broken_treatment_column_name_value():
+            insert_data_to_db("test_df_t", # The name of your table containing the dataset to be matched
+                                    df,
+                                    treatment_column_name= "treated",
+                                    outcome_column_name= 'outcome',conn = conn)
             df = holdout.copy()
             df.loc[0,'treated'] = 4
-            res_post_new1 = FLAME_db(input_data = "test_df", # The name of your table containing the dataset to be matched
+            res_post_new1 = FLAME_db(input_data = "test_df_t", # The name of your table containing the dataset to be matched
                                     holdout_data = df, # holdout set
                                     C = 0.1,
                                     conn = conn,
