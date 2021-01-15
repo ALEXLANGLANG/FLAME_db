@@ -34,10 +34,10 @@ data.loc[1,'treated'] = 1
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
-host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+host = 'localhost' #host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
 port = "5432"
-user="newuser"
-password= "sunxian123"
+user="postgres"
+password= ""
 conn = connect_db(database_name, user, password, host, port)
 insert_data_to_db("test_df1", # The name of your table containing the dataset to be matched
                     data,

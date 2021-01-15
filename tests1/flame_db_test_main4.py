@@ -32,10 +32,10 @@ holdout,weight_array = gen_data_db(n = 500,p = p, TE = TE)
 #Connect to the database
 select_db = "postgreSQL"  # Select the database you are using
 database_name='tmp' # database name
-host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+host = 'localhost' #host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
 port = "5432"
-user="newuser"
-password= "sunxian123"
+user="postgres"
+password= ""
 conn = connect_db(database_name, user, password, host, port)
 #Insert the data into database
 insert_data_to_db("test_df400", # The name of your table containing the dataset to be matched
@@ -47,7 +47,10 @@ insert_data_to_db("test_df401", # The name of your table containing the dataset 
                     data,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn, add_missing = True)
-                    
+insert_data_to_db("test_df402", # The name of your table containing the dataset to be matched
+                    data,
+                    treatment_column_name= "treated",
+                    outcome_column_name= 'outcome',conn = conn, add_missing = True)
 class TestFlame_db(unittest.TestCase):
               
     def test_missing(self):
@@ -76,7 +79,6 @@ class TestFlame_db(unittest.TestCase):
     def test_missing2(self):
         is_corrct = 1
         try:
-
             res_post_new2 = FLAME_db(input_data = "test_df401", # The name of your table containing the dataset to be matched
                                     holdout_data = holdout, # holdout set
                                     treatment_column_name= "treated",
@@ -98,31 +100,29 @@ class TestFlame_db(unittest.TestCase):
                              msg='Error when missing data in database')
 
 
-#    def test_missing_datasets(self):
-#        is_corrct = 1
-#        try:
-#
-#            holdout_miss = holdout.copy()
-#            m,n = holdout_miss.shape
-#            for i in range(int(m/100)):
-#                for j in [0,int(n/2)]:
-#                    holdout_miss.iloc[i,j] = np.nan
-#            res_post_new = FLAME_db(input_data = "test_df100", # The name of your table containing the dataset to be matched
-#                                    holdout_data = holdout_miss, # holdout set
-#                                    C = 0,
-#                                    conn = conn,
-#                                    matching_option = 2,
-#                                    adaptive_weights = 'decisiontree',
-#                                    verbose = 1,
-#                                    missing_data_replace = 0,
-#                                    missing_holdout_replace = 0)
-#            if check_statistics(res_post_new):
-#                is_corrct = 0
-#
-#        except (KeyError, ValueError):
-#                is_corrct = 0
-#
-#        self.assertEqual(1, is_corrct,
-#                             msg='Error when test missing datasets')
+
+    def test_weights(self):
+        is_corrct = 1
+        try:
+            res_post_new2 = FLAME_db(input_data = "test_df402", # The name of your table containing the dataset to be matched
+                                    holdout_data = holdout, # holdout set
+                                    treatment_column_name= "treated",
+                                    outcome_column_name= 'outcome',
+                                    C = 0.1,
+                                    conn = conn,
+                                    matching_option = 2,
+                                    adaptive_weights = False,
+                                    weight_array = weight_array,
+                                    verbose = 3,
+                                    k = 0
+                                    )
+            if  check_statistics(res_post_new2):
+                is_corrct = 0
+            
+        except (KeyError, ValueError):
+                is_corrct = 0
+
+        self.assertEqual(1, is_corrct,
+                             msg='Error when test weights')
 
 
