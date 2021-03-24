@@ -25,9 +25,11 @@ conn = connect_db(database_name, user, password, host, port)
 ```
 
 #### Insert the data to be matched into database
+
+If you already have the dataset in the database, please ignore this step. Insert the test_df (data to be matched) into the database you are using.
 ```
-insert_data_to_db("test_df54", # The name of your table containing the dataset to be matched
-                    dataToBeMatched,
+insert_data_to_db(  "datasetToBeMatched", # The name of your table containing the dataset to be matched
+                    test_df,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn)
 ```
