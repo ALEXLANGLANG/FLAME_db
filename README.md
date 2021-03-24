@@ -5,8 +5,8 @@
 FLAME database verion will work well and fast on large scale dataset
 --------------------------------------------------
 
-import pandas as pd
-import dame_flame
+$ import pandas as pd
+$ import dame_flame
 df = pd.DataFrame([[0,1,1,1,0,5], [0,1,1,0,0,6], [1,0,1,1,1,7], [1,1,1,1,1,7]], 
                   columns=["x1", "x2", "x3", "x4", "treated", "outcome"])
 
