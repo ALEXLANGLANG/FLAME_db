@@ -15,7 +15,7 @@ test_df = pd.DataFrame([[0,1,1,1,0,5], [0,1,1,0,0,6], [1,0,1,1,1,7], [1,1,1,1,1,
 
 #### Connect to the database
 ```
-select_db = "postgreSQL"  # Select the database you are using
+select_db = "postgreSQL"  # Select the database you are using: "MySQL", "postgreSQL","Microsoft SQL server"
 database_name='tmp' # database name you use 
 host = 'localhost' 
 port = "5432"
