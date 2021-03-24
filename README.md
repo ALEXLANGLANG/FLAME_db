@@ -21,23 +21,32 @@ host = 'localhost'
 port = "5432"
 user="postgres"
 password= ""
+
 conn = connect_db(database_name, user, password, host, port)
 ```
+
+
 
 #### Insert the data to be matched into database
 
 If you already have the dataset in the database, please ignore this step. Insert the test_df (data to be matched) into the database you are using.
 ```
-insert_data_to_db(  "datasetToBeMatched", # The name of your table containing the dataset to be matched
-                    test_df,
-                    treatment_column_name= "treated",
-                    outcome_column_name= 'outcome',conn = conn)
+insert_data_to_db("datasetToBeMatched", # The name of your table containing the dataset to be matched
+                  test_df,
+                  treatment_column_name= "treated",
+                  outcome_column_name= 'outcome',conn = conn)
 ```
-### Run FLAME_db
-res = FLAME_db(input_data = "test_df54", # The name of your table containing the dataset to be matched
-                    holdout_data = holdout, # holdout set
-                    conn = conn,    adaptive_weights = 'decisiontree')
+#### Run FLAME_db
 
+```
+res = FLAME_db(input_data = "datasetToBeMatched", # The name of your table containing the dataset to be matched
+              holdout_data = train_df, # holdout set. We will use holdout set to train our model
+              conn = conn # connector object that connects to your database. This is the output from function connect_db.
+              )
+```
+
+#### Analysis results
+```
 res[0]:
             df of units with the column values of their main matched
             group. Each row represent one matched groups.
@@ -55,7 +64,9 @@ res[0]:
             a list of level numbers where we have matched groups
         res[2]:
             a list of covariate names that we dropped
-#Post Analysis
+```
+#### Post Analysis
+```
 ATE_db(res)
 ATT_db(res)
-
+```
