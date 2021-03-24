@@ -7,18 +7,22 @@ FLAME database verion will work well and fast on large scale dataset
 ```
 import pandas as pd
 import dame_flame
-df = pd.DataFrame([[0,1,1,1,0,5], [0,1,1,0,0,6], [1,0,1,1,1,7], [1,1,1,1,1,7]], 
+train_df = pd.DataFrame([[0,1,1,1,0,5], [0,1,1,0,0,6], [1,0,1,1,1,7], [1,1,1,1,1,7]], 
                   columns=["x1", "x2", "x3", "x4", "treated", "outcome"])
+test_df = pd.DataFrame([[0,1,1,1,0,5], [0,1,1,0,0,6], [1,0,1,1,1,7], [1,1,1,1,1,7]], 
+                  columns=["x1", "x2", "x3", "x4", "treated", "outcome"])                 
 ```
-####Connect to the database
+
+#### Connect to the database
+```
 select_db = "postgreSQL"  # Select the database you are using
-database_name='tmp' # database name
-host = 'localhost' #host ='vcm-17819.vm.duke.edu' # "127.0.0.1"
+database_name='tmp' # database name you use 
+host = 'localhost' 
 port = "5432"
 user="postgres"
 password= ""
 conn = connect_db(database_name, user, password, host, port)
-
+```
 
 #### Insert the data to be matched into database
 insert_data_to_db("test_df54", # The name of your table containing the dataset to be matched
