@@ -49,22 +49,21 @@ res = FLAME_db(input_data = "datasetToBeMatched", # The name of your table conta
 #### Analysis results
 ```
 res[0]:
-            df of units with the column values of their main matched
-            group. Each row represent one matched groups.
-            res[0]['avg_outcome_control']: 
-                average of control units' outcomes in each matched group   
-            res[0]['avg_outcome_treated']: 
-                average of treated units' outcomes in each matched group   
-            res[0]['num_control']:
-                the number of control units in each matched group
-            res[0]['num_treated']:
-                the number of treated units in each matched group
-            res[0]['is_matched']:
-                the level each matched group belongs to
-        res[1]:
-            a list of level numbers where we have matched groups
-        res[2]:
-            a list of covariate names that we dropped
+    data frame of matched groups. Each row represent one matched groups.
+    res[0]['avg_outcome_control']: 
+        average of control units' outcomes in each matched group   
+    res[0]['avg_outcome_treated']: 
+        average of treated units' outcomes in each matched group   
+    res[0]['num_control']:
+        the number of control units in each matched group
+    res[0]['num_treated']:
+        the number of treated units in each matched group
+    res[0]['is_matched']:
+        the level each matched group belongs to
+res[1]:
+    a list of level numbers where we have matched groups
+res[2]:
+    a list of covariate names that we dropped
 ```
 #### Postprocessing
 
