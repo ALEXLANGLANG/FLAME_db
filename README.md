@@ -25,11 +25,13 @@ conn = connect_db(database_name, user, password, host, port)
 ```
 
 #### Insert the data to be matched into database
+```
 insert_data_to_db("test_df54", # The name of your table containing the dataset to be matched
                     dataToBeMatched,
                     treatment_column_name= "treated",
                     outcome_column_name= 'outcome',conn = conn)
-###Run FLAME_db
+```
+### Run FLAME_db
 res = FLAME_db(input_data = "test_df54", # The name of your table containing the dataset to be matched
                     holdout_data = holdout, # holdout set
                     conn = conn,    adaptive_weights = 'decisiontree')
