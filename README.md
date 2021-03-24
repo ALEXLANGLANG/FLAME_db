@@ -65,8 +65,9 @@ res[0]:
         res[2]:
             a list of covariate names that we dropped
 ```
-#### Post Analysis
+#### Postprocessing
+
 ```
-ATE_db(res)
-ATT_db(res)
+ATE_db(res) # Get ATE for the whole dataset
+ATT_db(res) # Get ATT for the whole dataset
 ```
