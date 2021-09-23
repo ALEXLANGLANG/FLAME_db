@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/almost-matching-exactly/DAME-FLAME-Python-Package/badge.svg)](https://coveralls.io/github/almost-matching-exactly/DAME-FLAME-Python-Package)
 
 # FLAME_db
-FLAME database verion will work well and fast on large scale dataset
+FLAME database verion will work well and fast on large scale dataset. Please refer to the following link for more details:  https://almost-matching-exactly.github.io/DAME-FLAME-Python-Package/. 
 --------------------------------------------------
 #### Make toy dataset 
 ```
